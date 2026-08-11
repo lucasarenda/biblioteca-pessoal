@@ -10,15 +10,15 @@ import br.com.bibliotecapessoal.repository.LivroRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestClient;
 
 import java.util.List;
 
 @Service
 public class LivroService {
 
-    private ConsumoApi consumo = new ConsumoApi();
-    private ConverteDados conversor = new ConverteDados();
     private final String ENDERECO_BASE = "https://www.googleapis.com/books/v1/volumes?q=";
+    private final RestClient restClient = RestClient.create();
 
     @Value("${google.books.api.key}")
     private String apiKey;
@@ -27,8 +27,10 @@ public class LivroService {
     private LivroRepository repository;
 
     private VolumeInfo getDadosLivro(String titulo) {
-        var json = consumo.obterDados(ENDERECO_BASE + titulo.replace(" ", "+") + "&key=" + apiKey);
-        DadosLivro dados = conversor.obterDados(json, DadosLivro.class);
+        DadosLivro dados = restClient.get()
+                .uri(ENDERECO_BASE + titulo.replace(" ", "+") + "&key=" + apiKey)
+                .retrieve()
+                .body(DadosLivro.class);
         return dados.items().get(0).volumeInfo();
     }
 

@@ -3,6 +3,8 @@ package br.com.bibliotecapessoal.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @Entity
 
 @Table(name = "livros")
@@ -26,10 +28,14 @@ Livro {
 
     private String capa;
 
+    @Column(length = 5000)
+    private String sinopse;
+
     public Livro(VolumeInfo dados) {
         this.titulo = dados.titulo();
         this.numeroPaginas = dados.numeroPaginas();
-        this.status = StatusLeitura.QUERO_LER;
+        this.sinopse = dados.sinopse();
+        this.status = StatusLeitura.NEUTRO;
         this.capa = dados.imageLinks() != null ? dados.imageLinks().thumbnail() : null;
     }
 }
