@@ -1,5 +1,6 @@
 package br.com.bibliotecapessoal.controller;
 
+import br.com.bibliotecapessoal.exception.LivroJaCadastradoException;
 import br.com.bibliotecapessoal.exception.LivroNaoEncontradoException;
 import br.com.bibliotecapessoal.model.Livro;
 import br.com.bibliotecapessoal.model.StatusLeitura;
@@ -44,6 +45,12 @@ public class LivrosController {
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public String handleLivroNaoEncontrado(LivroNaoEncontradoException e) {
 
+        return e.getMessage();
+    }
+
+    @ExceptionHandler(LivroJaCadastradoException.class)
+    @ResponseStatus(HttpStatus.CONFLICT)
+    public String handleLivroLivroJaCadastrado(LivroJaCadastradoException e) {
         return e.getMessage();
     }
 

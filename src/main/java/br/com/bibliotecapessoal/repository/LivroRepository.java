@@ -10,6 +10,7 @@ import java.util.Optional;
 
 public interface LivroRepository extends JpaRepository<Livro,Long>{
     List<Livro> findByStatus(StatusLeitura statusLeitura);
+    boolean existsByTituloIgnoreCase(String titulo);
 
 }
 
