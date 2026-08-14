@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Biblioteca Pessoal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <div class="brand">
+    <img src="logo.png" alt="">
+    <span>Biblioteca Pessoal</span>
+  </div>
+  <nav>
+    <button class="tab active" data-status="NEUTRO">Home</button>
+    <button class="tab" data-status="QUERO_LER">Quero ler</button>
+    <button class="tab" data-status="LENDO">Lendo</button>
+    <button class="tab" data-status="LIDO">Livros lidos</button>
+  </nav>
+</header>
+
+<main>
+  <p class="shelf-label" id="shelfLabel">Recém-adicionados</p>
+  <div id="content" class="grid" aria-live="polite"></div>
+</main>
+
+<div id="modalOverlay" class="modal-overlay"></div>
+
+<script src="LivroCard.js"></script>
+<script src="EstadoView.js"></script>
+<script src="LivroModal.js"></script>
+<script src="LivroApiService.js"></script>
+<script src="BibliotecaApp.js"></script>
+<script src="main.js"></script>
+
+</body>
+</html>

@@ -29,6 +29,7 @@ public class LivroService {
                 .uri(ENDERECO_BASE + titulo.replace(" ", "+") + "&key=" + apiKey)
                 .retrieve()
                 .body(DadosLivro.class);
+
         return dados.items().stream()
                 .map(Item::volumeInfo)
                 .filter(v -> v.sinopse() != null && v.imageLinks() != null)
@@ -42,7 +43,7 @@ public class LivroService {
             Livro livro = new Livro(dados);
 
             if (repository.existsByTituloIgnoreCase(livro.getTitulo())) {
-                throw new LivroJaCadastradoException("Livro : " + titulo);
+                throw new LivroJaCadastradoException("Livro ja cadastrado : " + titulo);
             }
             return repository.save(livro);
         } catch (IndexOutOfBoundsException e) {

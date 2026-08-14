@@ -50,7 +50,8 @@ public class LivrosController {
 
     @ExceptionHandler(LivroJaCadastradoException.class)
     @ResponseStatus(HttpStatus.CONFLICT)
-    public String handleLivroLivroJaCadastrado(LivroJaCadastradoException e) {
+    public String handleLivroJaCadastrado(LivroJaCadastradoException e) {
+
         return e.getMessage();
     }
 
